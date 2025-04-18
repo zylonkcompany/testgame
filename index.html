@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            margin-top: 100px;
+            transition: background-color 0.3s ease;
+        }
+        p {
+            color: #333;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <p>This is a test LOL :p</p>
+    <p>What is your name?</p>
+
+    <input type="text" name="name" placeholder="Enter your name" required>
+    <input type="button" value="Submit">
+    <p id="response"></p>
+
+    <script>
+        let badWordCount = 0;
+
+        document.querySelector('input[type="button"]').addEventListener('click', function () {
+            const name = document.querySelector('input[name="name"]').value.trim();
+            const responseElement = document.getElementById('response');
+            const forbiddenWords = ["SHIT", "BADWORD", "OFFENSIVE", "STUPID", "IDIOT", "DUMB"];
+
+            if (name === "") {
+                responseElement.innerText = "Please enter your name.";
+                return;
+            }
+
+            if (name.toLowerCase() === "sorry") {
+                // Resetar tudo
+                badWordCount = 0;
+                document.body.style.backgroundColor = "#f0f0f0";
+                responseElement.innerText = "Thank you for apologizing 😊 Let's start over!";
+                return;
+            }
+
+            if (forbiddenWords.includes(name.toUpperCase())) {
+                badWordCount++;
+                if (badWordCount > 5) {
+                    document.body.style.backgroundColor = "red";
+                    responseElement.innerText = "THAT IS NOT COOL! YOU MAKE ME ANGRY >:C";
+                } else {
+                    responseElement.innerText = "Please choose a better name. That is not cool :(";
+                }
+                return;
+            }
+
+            // Nome normal
+            document.body.style.backgroundColor = "#f0f0f0";
+            let responseMessage = `Hello ${name}, This a beautiful name!`;
+
+            if (name === "LOL") {
+                responseMessage = "LOL! That's a funny name!";
+            } else if (name === "test") {
+                responseMessage = "Test? What do you mean by that?";
+            } else if (name === "p") {
+                responseMessage = "P? Is that a name or just a letter?";
+            }
+            if (name ===  "hi"){
+                responseMessage = "Hi! How are you?";
+            } else if (name === "hello") {
+                responseMessage = "Hello! Nice to meet you!";
+            }
+            if (name.toLowerCase() === "start game") {
+    responseElement.innerText = "🎮 Game started! First question: What's 2 + 2?";
+    return;
+} else if (name === "4") {
+    responseElement.innerText = "Correct! 🎉";
+    return;
+} else if (name.toLowerCase() === "exit") {
+    responseElement.innerText = "Goodbye! Come play again later 😊";
+    return;
+}
+
+
+            responseElement.innerText = responseMessage;
+        });
+    </script>
+</body>
+</html>
